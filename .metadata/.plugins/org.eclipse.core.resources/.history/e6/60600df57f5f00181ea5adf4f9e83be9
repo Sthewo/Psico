@@ -19,7 +19,7 @@ public class MecPalanca {
 	//TODO elegir el lugar sobre el que hacer la fuerza || calcular el peso de la segunda caja.
 	//TODO una vez tenemos el enunciado calcular el resultado.
 	
-	public static String getEnunciadoProblema( int numeroProblema,  int pesoCaja, double posicionCaja, String posicionFuerza){
+	public static String getEnunciadoProblema( int numeroProblema ){
 		String enunciado = "";
 		
 		switch (numeroProblema){
@@ -33,9 +33,6 @@ public class MecPalanca {
 			enunciado = "Que fuerza debemos hacer para equilibrar la balanza, si la caja pesa X = [1,10] y esta situada a m = {1m, 1'5m, 2m}?";
 			break;
 		case 4:
-			enunciado = "La caja pesa X = [1,10] y esta situada a m = {1m, 1'5m, 2m}, sobre que punto debe colocarse la segunda caja que pesa Y para que la balanza este equilibrada?";
-			break;
-		case 5:
 			enunciado = "La caja pesa X = [1,10] y esta situada a m = {1m, 1'5m, 2m}, sobre que punto debe colocarse la segunda caja que pesa Y para que la balanza este equilibrada?";
 			break;
 		}

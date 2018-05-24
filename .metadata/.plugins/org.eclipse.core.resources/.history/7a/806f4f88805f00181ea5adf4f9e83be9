@@ -19,7 +19,7 @@ public class MecPalanca {
 	//TODO elegir el lugar sobre el que hacer la fuerza || calcular el peso de la segunda caja.
 	//TODO una vez tenemos el enunciado calcular el resultado.
 	
-	public static String getEnunciadoProblema( int numeroProblema,  int pesoCaja, double posicionCaja, String posicionFuerza){
+	public static String getEnunciadoProblema( int numeroProblema ){
 		String enunciado = "";
 		
 		switch (numeroProblema){
