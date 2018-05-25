@@ -2,8 +2,15 @@ public class MecPalanca {
 
 	
 	public static void main(String[] args) {
-			
-		System.out.println(getEnunciadoProblema());
+		
+		int numeroPregunta = RNG(1,5);
+		int pesoCaja = RNG(1,10);
+		int pesoCajaB = RNG(1,10);
+		double posicionCaja = posicionCaja(RNG(1,3));
+		String posicionFuerza = posicionFuerza(RNG(1,3));
+		
+		String pregunta = generaEnunciadoProblema(numeroPregunta, pesoCaja, posicionCaja, posicionFuerza, pesoCajaB);
+		System.out.println(pregunta);
 	}
 	
 	//PREGUNTA: (Las preguntas 1,2,3 es la misma pregunta pero reformulada, la pregunta 4 es diferente)
@@ -25,9 +32,8 @@ public class MecPalanca {
 		
 		String pregunta = generaEnunciadoProblema(numeroPregunta, pesoCaja, posicionCaja, posicionFuerza, pesoCajaB);
 		
-		return pregunta;
+		return enunciado;
 	}
-	
 	public static String generaEnunciadoProblema( int numeroProblema,  int pesoCaja, double posicionCaja, String posicionFuerza, int pesoCajaB ){
 		String enunciado = "";
 		

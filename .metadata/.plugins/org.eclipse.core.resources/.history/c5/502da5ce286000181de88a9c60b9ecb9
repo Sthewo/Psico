@@ -3,7 +3,7 @@ public class MecPalanca {
 	
 	public static void main(String[] args) {
 			
-		System.out.println(getEnunciadoProblema());
+		System.out.println(getEnunciadoProblema);
 	}
 	
 	//PREGUNTA: (Las preguntas 1,2,3 es la misma pregunta pero reformulada, la pregunta 4 es diferente)
