@@ -56,7 +56,7 @@ public class MecPalanca {
 		CSV += "IMAGEN;";
 		CSV += ";;;;;;";
 		CSV += "A;";
-		CSV += "B;";
+		CSV += "b;";
 		CSV += "C;";
 		CSV += "D;";
 		CSV += "CORRECTA;";
