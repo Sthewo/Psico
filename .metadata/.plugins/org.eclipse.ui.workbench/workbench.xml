@@ -36,7 +36,7 @@
 </editorArea>
 <editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MecPalanca.java" partName="MecPalanca.java" path="/home/rookie/Documents/Psico/PsicoProject/MecPalanca.java" title="MecPalanca.java" tooltip="PsicoProject/MecPalanca.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/PsicoProject/MecPalanca.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="3126" selectionTopPixel="1085"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="9333" selectionTopPixel="0"/>
 </editor>
 </editors>
 <views>
@@ -251,7 +251,7 @@
 </folder>
 </info>
 <info part="org.eclipse.ui.editorss" ratio="0.24950495" ratioLeft="252" ratioRight="758" relationship="2" relative="left"/>
-<info folder="true" part="bottom" ratio="0.8210075" ratioLeft="766" ratioRight="167" relationship="4" relative="org.eclipse.ui.editorss">
+<info folder="true" part="bottom" ratio="0.8424437" ratioLeft="786" ratioRight="147" relationship="4" relative="org.eclipse.ui.editorss">
 <folder activePageID="org.eclipse.ui.console.ConsoleView" appearance="2" expanded="2">
 <page content="org.eclipse.ui.views.ProblemView" label="Problems"/>
 <page content="org.eclipse.jdt.ui.JavadocView" label="Javadoc"/>
