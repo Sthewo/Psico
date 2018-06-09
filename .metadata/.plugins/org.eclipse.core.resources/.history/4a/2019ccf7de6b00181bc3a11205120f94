@@ -1,0 +1,193 @@
+public class MecPalanca {
+	
+	static public class cajaB{
+		public cajaB(String f_posicion, int f_distancia){
+			posicion = f_posicion;
+			distancia = f_distancia;
+		}
+		
+		public String posicion = "A";
+		public int distancia = 1;
+		
+	};
+	
+	static public class resultado{
+		public resultado(){
+			a = "";
+			b = "";
+			c = "";
+			d = "";
+			correcta = "";
+		}
+		
+		public String a;
+		public String b;
+		public String c;
+		public String d;
+		public String correcto;
+			
+	}
+	
+	public static void main(String[] args) {
+			
+		System.out.println(getCSV());
+	}
+	
+	//PREGUNTA: (Las preguntas 1,2,3 es la misma pregunta pero reformulada, la pregunta 4 es diferente)
+	//1. La caja pesa X = [1,10] y esta situada a m = {1m, 1'5m, 2m}, para equilibrar la balanza que fuerza hay que aplicar sobre LETRA = {A, B, C}?
+	//2. Para equilibrar la balanza que fuerza hay que aplicar sobre LETRA = {A, B, C}, si la caja pesa X = [1,10] y esta situada a m = {1m, 1'5m, 2m}?
+	//3. Que fuerza debemos hacer para equilibrar la balanza, si la caja pesa X = [1,10] y esta situada a m = {1m, 1'5m, 2m}?
+	//4. La caja pesa X = [1,10] y esta situada a m = {1m, 1'5m, 2m}, sobre que punto debe colocarse la segunda caja que pesa Y para que la balanza este equilibrada?
+	//TODO una vez tenemos el enunciado calcular el resultado.
+	
+	/*
+	 * Siempre se pasan el peso de la posicion de la Fuerza y el peso de la CAJA B aunque no se usen en todos los enunciados.
+	 */
+	public static String getCSV(){
+		
+		int numeroPregunta = RNG(1,3);
+		int pesoCaja = RNG(1,10);
+		int pesoCajaB = RNG(1,10);
+		int posicionCaja = posicionCaja(RNG(1,3));
+		cajaB cajaB = posicionFuerza(RNG(1,3));
+		
+		String pregunta = generaEnunciadoProblema(numeroPregunta, pesoCaja, posicionCaja, cajaB, pesoCajaB);
+		resultado resultado = calcularResultado(numeroPregunta, pesoCaja, posicionCaja, cajaB, pesoCajaB);
+		
+		String CSV = ""; 
+		CSV += "mecanica;";
+		CSV += pregunta + ";";
+		CSV += "IMAGEN;";
+		CSV += ";;;;;;";
+		CSV += "a)"+ resultado.a +";";
+		CSV += "b)"+ resultado.b +";";
+		CSV += "c)"+ resultado.c +";";
+		CSV += "d)"+ resultado.d +";";
+		CSV += resultado.a +";";
+		CSV += "El peso de la caja, multiplicado por la distancia de la caja hasta el medio de la palanca, debe ser igual para ambas cajas.;";
+		
+		
+		return CSV;
+	}
+	
+	public static String generaEnunciadoProblema( int numeroProblema,  int pesoCaja, double posicionCaja, cajaB cajaB, int pesoCajaB ){
+		String enunciado = "";
+		
+		switch (numeroProblema){
+		case 1:
+			enunciado = "La caja pesa " + pesoCaja + "Kg y esta situada a " + posicionCaja + "m del centro de la palanca, para equilibrar la balanza que fuerza hay que aplicar sobre " + cajaB.posicion + ".";
+			break;
+		case 2:
+			enunciado = "Para equilibrar la balanza que fuerza hay que aplicar sobre " + cajaB.posicion + ". Si la caja pesa " + pesoCaja + "Kg y esta situada a " + posicionCaja + "m del centro.";
+			break;
+		case 3:
+			enunciado = "Que fuerza debemos hacer sobre el punto " + cajaB.posicion + " para equilibrar la balanza, si la caja pesa " + pesoCaja + "Kg y esta situada a " + posicionCaja + "m del centro.";
+			break;
+		/*case 4:
+			enunciado = "La caja pesa " + pesoCaja + "Kg y esta situada a " + posicionCaja + "m del centro de la palanca ¿Sobre que punto debe colocarse la segunda caja que pesa " + pesoCajaB + "Kg para que la balanza este equilibrada?";
+			break;
+		case 5:
+			enunciado = "La caja pesa " + pesoCaja + "Kg y esta situada a " + posicionCaja + "m del centro de la palanca ¿Sobre que punto debe colocarse la segunda caja que pesa " + pesoCajaB + "Kg para que la balanza este equilibrada?";
+			break;*/
+		}
+		return enunciado;
+	}
+			
+	
+	public static int posicionCaja( int numero ){
+		int posicion = 0;
+		
+		switch (numero){
+		case 1:
+			posicion = 4;
+			break;
+		case 2:
+			posicion = 2;
+			break;
+		case 3:
+			posicion = 1;
+			break;
+		}
+		
+		return posicion;
+	}
+	
+	
+	
+	public static cajaB posicionFuerza( int numero ){
+		
+		cajaB cajaB = new cajaB("A",1);
+		
+		switch (numero){
+		case 1:
+			cajaB.posicion = "A";
+			cajaB.distancia = 1;
+			break;
+		case 2:
+			cajaB.posicion = "B";
+			cajaB.distancia = 2;
+			break;
+		case 3:
+			cajaB.posicion = "C";
+			cajaB.distancia = 4;
+			break;
+		}
+		
+		return cajaB;
+	}
+	
+
+	public static resultado calcularResultado( int numeroProblema,  int pesoCaja, int posicionCaja, cajaB cajaB, int pesoCajaB ){
+		
+		resultado resultado = new resultado();
+		
+		if( numeroProblema == 1 || numeroProblema == 2 || numeroProblema == 3 ){
+			
+			resultado.a = pesoCaja * posicionCaja / cajaB.distancia + "";
+			resultado.b = pesoCaja * posicionCaja / cajaB.distancia * 2 + "";
+			resultado.c = pesoCaja * posicionCaja / cajaB.distancia * 3 + "";
+			resultado.d = pesoCaja * posicionCaja / cajaB.distancia * 4 + "";
+			resultado.correcto = resultado.a;
+			
+		}
+		
+		
+		return resultado;
+	}
+	
+	public static resultado desordenarResultados(resultado resultado){
+		
+		
+		switch(RNG(1,4)){
+			case 1:
+				break;
+			case 2:
+				String temp = resultado.a;
+				resultado.a = resultado.b;
+				resultado.b = temp;
+				break;
+		}
+		
+		
+		return resultado;
+	}
+	
+	public static int RNG( int DESDE, int HASTA ){
+		int random = (int )(Math.random() * HASTA + DESDE);
+		
+		return random;
+	}
+	
+	static class IntHolder { public String value = ""; }
+
+	static void swap(IntHolder a, IntHolder b)
+	{
+	   
+	    String temp = a.value;
+	    a.value = b.value;
+	    b.value = temp;
+	}
+		
+	
+
+}

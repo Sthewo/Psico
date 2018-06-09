@@ -1,33 +1,48 @@
 public class MecPalanca {
 	
 	static public class cajaB{
-		public cajaB(String f_posicion, int f_distancia){
+		public cajaB(String f_posicion, double f_distancia){
 			posicion = f_posicion;
 			distancia = f_distancia;
 		}
 		
 		public String posicion = "A";
-		public int distancia = 1;
-		
+		public double distancia = 1;
+			
 	};
 	
 	static public class resultado{
 		public resultado(){
-			a = 0;
-			b = 0;
-			c = 0;
-			d = 0;
+			a = "";
+			b = "";
+			c = "";
+			d = "";
+			correcto = "";
 		}
 		
-		public int a;
-		public int b;
-		public int c;
-		public int d;
+		public String a;
+		public String b;
+		public String c;
+		public String d;
+		public String correcto;
+			
 	}
 	
 	public static void main(String[] args) {
-			
-		System.out.println(getCSV());
+		
+		for( int f_pesoCaja = 1; f_pesoCaja < 21; f_pesoCaja++){
+			for(int f_posicionCaja = 1; f_posicionCaja < 4; f_posicionCaja++){
+				for(int f_posicionFuerza = 1; f_posicionFuerza < 4; f_posicionFuerza++){
+					cajaB cajaB = posicionFuerza(f_posicionFuerza);
+					String nombreFoto = nombreFoto(f_posicionCaja);
+					int posicionCaja = posicionCaja(f_posicionCaja);
+					int pesoCajaB = 0;
+					int numeroPregunta = RNG(1,3);
+					
+					System.out.println(getCSV(numeroPregunta, f_pesoCaja, pesoCajaB, posicionCaja, nombreFoto, cajaB));
+				}
+			}
+		}
 	}
 	
 	//PREGUNTA: (Las preguntas 1,2,3 es la misma pregunta pero reformulada, la pregunta 4 es diferente)
@@ -40,44 +55,47 @@ public class MecPalanca {
 	/*
 	 * Siempre se pasan el peso de la posicion de la Fuerza y el peso de la CAJA B aunque no se usen en todos los enunciados.
 	 */
-	public static String getCSV(){
+	public static String getCSV(int numeroPregunta, int pesoCaja, int pesoCajaB, int posicionCaja, String nombreFoto, cajaB cajaB){
 		
-		int numeroPregunta = RNG(1,3);
-		int pesoCaja = RNG(1,10);
-		int pesoCajaB = RNG(1,10);
-		int posicionCaja = posicionCaja(RNG(1,3));
-		cajaB cajaB = posicionFuerza(RNG(1,3));
+//		int numeroPregunta = RNG(1,3);
+//		int pesoCaja = RNG(1,10);
+//		int pesoCajaB = RNG(1,10);
+//		int posicionCaja = posicionCaja(RNG(1,3));
+//		String nombreFoto = nombreFoto(posicionCaja);
+//		cajaB cajaB = posicionFuerza(RNG(1,3));
+		
 		
 		String pregunta = generaEnunciadoProblema(numeroPregunta, pesoCaja, posicionCaja, cajaB, pesoCajaB);
+		resultado resultado = calcularResultado(numeroPregunta, pesoCaja, posicionCaja, cajaB, pesoCajaB);
 		
 		String CSV = ""; 
 		CSV += "mecanica;";
 		CSV += pregunta + ";";
-		CSV += "IMAGEN;";
+		CSV += nombreFoto +";";
 		CSV += ";;;;;;";
-		CSV += "A;";
-		CSV += "B;";
-		CSV += "C;";
-		CSV += "D;";
-		CSV += "CORRECTA;";
-		CSV += "EXPLICACION;";
+		CSV += "a)"+ resultado.a +";";
+		CSV += "b)"+ resultado.b +";";
+		CSV += "c)"+ resultado.c +";";
+		CSV += "d)"+ resultado.d +";";
+		CSV += resultado.correcto +";";
+		CSV += "El peso de la caja, multiplicado por la distancia de la caja hasta el medio de la palanca, debe ser igual para ambas cajas.;";
 		
 		
 		return CSV;
 	}
 	
-	public static String generaEnunciadoProblema( int numeroProblema,  int pesoCaja, double posicionCaja, cajaB cajaB, int pesoCajaB ){
+	public static String generaEnunciadoProblema( int numeroProblema,  int pesoCaja, int posicionCaja, cajaB cajaB, int pesoCajaB ){
 		String enunciado = "";
 		
 		switch (numeroProblema){
 		case 1:
-			enunciado = "La caja pesa " + pesoCaja + "Kg y esta situada a " + posicionCaja + "m del centro de la palanca, para equilibrar la balanza que fuerza hay que aplicar sobre " + cajaB.posicion + ".";
+			enunciado = "La caja pesa " + pesoCaja + "Kg y está situada a " + posicionCaja + "m del centro de la palanca, para equilibrar la balanza qué fuerza hay que aplicar sobre " + cajaB.posicion + ".";
 			break;
 		case 2:
-			enunciado = "Para equilibrar la balanza que fuerza hay que aplicar sobre " + cajaB.posicion + ". Si la caja pesa " + pesoCaja + "Kg y esta situada a " + posicionCaja + "m del centro.";
+			enunciado = "Para equilibrar la balanza qué fuerza hay que aplicar sobre " + cajaB.posicion + ". Si la caja pesa " + pesoCaja + "Kg y está situada a " + posicionCaja + "m del centro.";
 			break;
 		case 3:
-			enunciado = "Que fuerza debemos hacer sobre el punto " + cajaB.posicion + " para equilibrar la balanza, si la caja pesa " + pesoCaja + "Kg y esta situada a " + posicionCaja + "m del centro.";
+			enunciado = "Qué fuerza debemos hacer sobre el punto " + cajaB.posicion + " para equilibrar la balanza, si la caja pesa " + pesoCaja + "Kg y está situada a " + posicionCaja + "m del centro.";
 			break;
 		/*case 4:
 			enunciado = "La caja pesa " + pesoCaja + "Kg y esta situada a " + posicionCaja + "m del centro de la palanca ¿Sobre que punto debe colocarse la segunda caja que pesa " + pesoCajaB + "Kg para que la balanza este equilibrada?";
@@ -108,6 +126,22 @@ public class MecPalanca {
 		return posicion;
 	}
 	
+	public static String nombreFoto( int numero ){
+		String foto = "";
+		switch (numero){
+		case 1:
+			foto = "mec09062018-1.png";
+			break;
+		case 2:
+			foto = "mec09062018-2.png";
+			break;
+		case 3:
+			foto = "mec09062018-3.png";
+			break;
+		}
+		
+		return foto;
+	}
 	
 	
 	public static cajaB posicionFuerza( int numero ){
@@ -133,14 +167,129 @@ public class MecPalanca {
 	}
 	
 
-	public static resultado calcularResultado( int numeroProblema,  int pesoCaja, int posicionCaja, cajaB cajaB ){
+	public static resultado calcularResultado( int numeroProblema,  int pesoCaja, int posicionCaja, cajaB cajaB, int pesoCajaB ){
 		
 		resultado resultado = new resultado();
 		
-		resultado.a = pesoCaja * posicionCaja / cajaB.distancia;
-		resultado.b = resultado.a*2;
-		resultado.c = resultado.a*3;
-		resultado.d = resultado.a*4;
+		double calculo = pesoCaja * posicionCaja / cajaB.distancia;
+		
+		if( numeroProblema == 1 || numeroProblema == 2 || numeroProblema == 3 ){
+			
+			
+			resultado.a = calculo 	  + "";
+			resultado.b = calculo * 2 + "";
+			resultado.c = calculo * 3 + "";
+			resultado.d = calculo * 4 + "";
+			
+			String pattern = "(.*)\\.0";
+			resultado.a = resultado.a.replaceAll(pattern, "$1");
+			resultado.b = resultado.b.replaceAll(pattern, "$1");
+			resultado.c = resultado.c.replaceAll(pattern, "$1");
+			resultado.d = resultado.d.replaceAll(pattern, "$1");
+			resultado.correcto = resultado.a;
+			
+		}
+		
+		desordenarResultados(resultado);
+		
+		
+		return resultado;
+	}
+	
+	public static resultado desordenarResultados(resultado resultado){
+		
+		String temp;
+		
+		switch(RNG(1,4)){//Intercambia A con otra respuesta
+			case 1:
+				break;
+			case 2:
+				temp = resultado.a;
+				resultado.a = resultado.b;
+				resultado.b = temp;
+				break;
+			case 3:
+				temp = resultado.a;
+				resultado.a = resultado.c;
+				resultado.c = temp;
+				break;
+			case 4:
+				temp = resultado.a;
+				resultado.a = resultado.d;
+				resultado.d = temp;
+				break;
+		}
+		
+		switch(RNG(1,4)){//Intercambia B con otra respuesta
+		case 1:
+			break;
+		case 2:
+			temp = resultado.b;
+			resultado.b = resultado.a;
+			resultado.a = temp;
+			break;
+		case 3:
+			temp = resultado.b;
+			resultado.b = resultado.c;
+			resultado.c = temp;
+			break;
+		case 4:
+			temp = resultado.b;
+			resultado.b = resultado.d;
+			resultado.d = temp;
+			break;
+		}
+		
+		switch(RNG(1,4)){//Intercambia C con otra respuesta
+		case 1:
+			break;
+		case 2:
+			temp = resultado.c;
+			resultado.c = resultado.a;
+			resultado.a = temp;
+			break;
+		case 3:
+			temp = resultado.c;
+			resultado.c = resultado.b;
+			resultado.b = temp;
+			break;
+		case 4:
+			temp = resultado.c;
+			resultado.c = resultado.d;
+			resultado.d = temp;
+			break;
+		}
+		
+		switch(RNG(1,4)){//Intercambia D con otra respuesta
+		case 1:
+			break;
+		case 2:
+			temp = resultado.d;
+			resultado.d = resultado.a;
+			resultado.a = temp;
+			break;
+		case 3:
+			temp = resultado.d;
+			resultado.d = resultado.b;
+			resultado.b = temp;
+			break;
+		case 4:
+			temp = resultado.d;
+			resultado.d = resultado.c;
+			resultado.c = temp;
+			break;
+		}
+		
+		if(resultado.correcto == resultado.a){
+			resultado.correcto = "a)"+resultado.correcto;
+		}else if( resultado.correcto == resultado.b){
+			resultado.correcto = "b)"+resultado.correcto;
+		}else if( resultado.correcto == resultado.c){
+			resultado.correcto = "c)"+resultado.correcto;
+		}else if( resultado.correcto == resultado.d){
+			resultado.correcto = "d)"+resultado.correcto;
+		}
+			
 		
 		
 		return resultado;
@@ -150,6 +299,16 @@ public class MecPalanca {
 		int random = (int )(Math.random() * HASTA + DESDE);
 		
 		return random;
+	}
+	
+	static class IntHolder { public String value = ""; }
+
+	static void swap(IntHolder a, IntHolder b)
+	{
+	   
+	    String temp = a.value;
+	    a.value = b.value;
+	    b.value = temp;
 	}
 		
 	
